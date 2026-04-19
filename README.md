@@ -31,9 +31,9 @@ This repository hosts signed + notarized macOS builds of [**Neo**](https://githu
 
 ## What is Neo
 
-Neo is a **native desktop agentic coding assistant** — a full reasoning loop that observes, plans, acts, and reflects on your codebase. It runs locally as a Tauri v2 app, talks to any LLM through OpenRouter, and ships with 26 built-in tools plus Model Context Protocol (MCP) support for unlimited extension.
+Neo is an AI coding assistant that lives on your desktop. Open a folder, ask it to do something, and it reads your code, writes files, runs commands, and gets the job done — all on your machine.
 
-Unlike cloud IDEs, nothing leaves your machine except the LLM API call itself. Unlike terminal CLIs, you get a proper native UI with block-level streaming, a permission engine, thread history, and 14 themes.
+No browser tab. No cloud sync. No subscription. Just a native Mac app that pairs with your editor.
 
 > *"I know kung fu."* — You, after Neo writes your entire test suite.
 
@@ -41,91 +41,15 @@ Unlike cloud IDEs, nothing leaves your machine except the LLM API call itself. U
 
 ## Features
 
-### Agentic reasoning loop
-
-Neo runs a multi-turn **Thought → Action → Observation** cycle up to 40 iterations per message. Each turn streams text and tool calls, executes them, feeds observations back into the next turn, and keeps going until the task is done.
-
-- **Parallel read, serial write.** Read-only tools (`read`, `glob`, `grep`, `ls`, `web_fetch`) run concurrently via `Promise.all`. Mutating tools (`edit`, `write`, `bash`) run sequentially to prevent race conditions. Same pattern as database query optimizers.
-- **First-class cancellation.** Every tool execution receives an `AbortSignal`. Cancel mid-loop → zero partial state. No half-written files, no zombie processes.
-- **Loop detection.** A sliding-window detector catches degenerate patterns (same tool 5× in a row, A → B → A oscillation, repeating errors) and injects corrective hints before tokens burn.
-
-### 26 built-in tools
-
-| Category | Tools |
-| --- | --- |
-| **File ops** (10) | `read`, `write`, `edit`, `multiedit`, `glob`, `grep`, `ls`, `read_many_files`, `replace`, `apply_patch` |
-| **Shell** (1) | `bash` — 2-minute timeout, dangerous-command detection, background tasks, 30KB output cap |
-| **Web** (2) | `web_fetch`, `web_search` |
-| **Memory** (2) | `memory_read`, `memory_write` — persistent, cross-session |
-| **Tasks** (2) | `todowrite`, `todoread` — scratchpad the agent maintains itself |
-| **Skills** (2) | `list_skills`, `use_skill` — reusable, domain-specific prompt packs |
-| **Interaction** (1) | `question` — structured multi-choice wizard for ambiguous requests |
-| **Planning** (2) | `plan_enter`, `plan_exit` — read-only sandbox for drafting before executing |
-| **Sub-agents** (1) | `task` — spawns an isolated agent with its own 20-iteration budget |
-| **MCP** (∞) | Any tool from any connected MCP server |
-
-All tools are defined via a typed `Tool.define()` API with Zod schema validation, automatic output truncation, and per-call execution timing.
-
-### Model Context Protocol (MCP)
-
-Drop a `.mcp.json` in your workspace and Neo auto-discovers and connects to your MCP servers on startup. Every MCP tool goes through the same permission checks, output truncation, and state tracking as built-in tools — no second-class citizens.
-
-```json
-{
-  "servers": {
-    "postgres": { "command": "npx", "args": ["-y", "@mcp/postgres"] },
-    "github":   { "command": "npx", "args": ["-y", "@mcp/github"] }
-  }
-}
-```
-
-### Context engineering
-
-Three layers of context management, because every token counts.
-
-- **`NEO.md` — project rules.** A markdown file in your workspace that gets injected into every system prompt. Your steering wheel: tech stack conventions, forbidden paths, test commands.
-- **`MEMORY.md` — persistent memory.** A markdown file the agent reads and writes itself. No vector DB, no embeddings, no indexing pipeline. Cross-session state — architecture decisions, known issues, gotchas — survives restarts and new workspaces.
-- **Conversation compression.** When history exceeds 30 messages, Neo compresses older turns into structured summaries while preserving the last 8 verbatim. Token budget is estimated before and after. File paths, tool calls, and past decisions are never lost.
-
-### Skills
-
-Reusable prompt packs for domain-specific workflows. A skill is a folder with a `SKILL.md` — Neo discovers them automatically, exposes them via `list_skills` and `use_skill`, and the agent picks the right one for the task. Ship your own, share them across workspaces.
-
-### Permission engine
-
-Every tool call flows through a typed permission check before it runs.
-
-- **Read-only tools** → auto-allow.
-- **Write tools** (`edit`, `write`, `bash`) → prompt the user inline.
-- **Dangerous commands** (`rm -rf`, `sudo`, `git push --force`, `chmod 777`) → always prompt, even if the ruleset says allow.
-- **Session approvals.** "Allow always" persists for the session, resets on clear. Configurable per-tool, per-pattern.
-
-### Sub-agents
-
-Neo can spawn isolated sub-agents via the `task` tool — each gets its own 20-iteration reasoning budget and independent context window. Useful for parallelizable work (research N things, then synthesize) without polluting the main thread.
-
-### Thread management + session recording
-
-- Every conversation is a thread, persisted across restarts.
-- Sessions recorded as JSONL in `.neo/sessions/` — full replay, debug, search.
-- Sidebar thread list, global search, rename/pin/delete.
-
-### Native macOS chrome
-
-Built with Tauri v2 and React 19 — not an Electron wrapper around a web view.
-
-- Custom titlebar with traffic lights, workspace path, new-window, settings, new-thread buttons
-- Auto-detects installed editors (VS Code, Cursor, Zed, JetBrains, Sublime) and offers one-click open
-- Reveal in Finder, Open in Terminal — straight from the workspace bar
-- Block-level streaming UI — see tool calls render as structured cards as they execute, not as raw JSON
-
-### Themes
-
-14 built-in themes (Dracula, Monokai, Solarized Light/Dark, Nord, Tokyo Night, Catppuccin variants, and more), plus custom themes via `~/.neo/themes/*.json`. Auto-switch between light and dark on a time schedule. Per-theme accent color override, density control (compact / comfortable), custom font family + size.
-
-### In-app auto-updates
-
-This repo is the update source. Silent background check on launch, dot on the Settings icon when a new version ships, one-click install from **Settings → About**. Update payloads are minisign-signed; the public key is embedded in the app and unverified tarballs are rejected before install.
+- 🧠 **Works your whole codebase.** Reads files, searches across the project, edits, runs commands — end to end, not one file at a time.
+- 🌐 **Searches the web when it needs to.** Grabs docs, pulls in examples, fetches pages.
+- 💾 **Remembers what matters.** Keeps cross-session notes in a markdown file — architecture decisions, gotchas, preferences — so you don't repeat yourself.
+- 🛡️ **Asks before risky stuff.** Anything that touches your disk or runs a command gets an inline approval prompt. Read-only actions just run.
+- 🧩 **Extends with plugins.** Connect databases, GitHub, your own services — Neo auto-discovers and uses them.
+- 🧭 **Thinks before it acts.** Big tasks start with a plan you can approve before anything runs.
+- 🎨 **Looks how you want.** 14 themes out of the box (Dracula, Nord, Tokyo Night, Catppuccin, and more), custom fonts, light/dark auto-switch.
+- 🚀 **Updates itself.** New versions install with one click from Settings. No re-downloading.
+- 🍎 **Native Mac app.** Tiny download, no Electron bloat, proper traffic lights, Finder and Terminal shortcuts, one-click open in VS Code / Cursor / Zed / JetBrains / Sublime.
 
 <br />
 
