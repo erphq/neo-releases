@@ -4,12 +4,16 @@
 
 # Neo
 
-**A local-first agentic AI coding assistant for macOS.**
+**A local-first agentic AI coding assistant for your desktop.**
 
 <br />
 
-<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo_0.1.0_aarch64.dmg">
+<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo_0.1.2_aarch64.dmg">
   <img src="https://img.shields.io/badge/Download%20for%20macOS-black?style=for-the-badge&logo=apple&logoColor=white&labelColor=black" alt="Download for macOS" height="44" />
+</a>
+&nbsp;&nbsp;
+<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo_0.1.2_x64-setup.exe">
+  <img src="https://img.shields.io/badge/Download%20for%20Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white&labelColor=0078D4" alt="Download for Windows" height="44" />
 </a>
 
 <br /><br />
@@ -17,6 +21,7 @@
 ![macOS](https://img.shields.io/badge/macOS-10.13+-000?logo=apple&logoColor=white)
 ![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-M1%2FM2%2FM3%2FM4-000?logo=apple&logoColor=white)
 ![Notarized](https://img.shields.io/badge/Notarized-Apple%20Developer%20ID-success?logo=apple&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-10%2F11%20x64-0078D4?logo=windows&logoColor=white)
 [![Latest release](https://img.shields.io/github/v/release/erphq/neo-releases?label=latest&color=blue)](https://github.com/erphq/neo-releases/releases/latest)
 
 [**What is Neo**](#what-is-neo) · [**Features**](#features) · [**Install**](#install) · [**Auto-updates**](#auto-updates) · [**Support**](#support--issues)
@@ -25,7 +30,7 @@
 
 <br />
 
-This repository hosts signed + notarized macOS builds of [**Neo**](https://github.com/erphq/neo). Source code lives in the main [erphq/neo](https://github.com/erphq/neo) repo — this one only holds release artifacts.
+This repository hosts signed + notarized builds of [**Neo**](https://github.com/erphq/neo). Source code lives in the main [erphq/neo](https://github.com/erphq/neo) repo — this one only holds release artifacts.
 
 <br />
 
@@ -33,7 +38,7 @@ This repository hosts signed + notarized macOS builds of [**Neo**](https://githu
 
 Neo is an AI coding assistant that lives on your desktop. Open a folder, ask it to do something, and it reads your code, writes files, runs commands, and gets the job done — all on your machine.
 
-No browser tab. No cloud sync. No subscription. Just a native Mac app that pairs with your editor.
+No browser tab. No cloud sync. No subscription. Just a native desktop app that pairs with your editor.
 
 > *"I know kung fu."* — You, after Neo writes your entire test suite.
 
@@ -49,19 +54,18 @@ No browser tab. No cloud sync. No subscription. Just a native Mac app that pairs
 - 🧭 **Thinks before it acts.** Big tasks start with a plan you can approve before anything runs.
 - 🎨 **Looks how you want.** 14 themes out of the box (Dracula, Nord, Tokyo Night, Catppuccin, and more), custom fonts, light/dark auto-switch.
 - 🚀 **Updates itself.** New versions install with one click from Settings. No re-downloading.
-- 🍎 **Native Mac app.** Tiny download, no Electron bloat, proper traffic lights, Finder and Terminal shortcuts, one-click open in VS Code / Cursor / Zed / JetBrains / Sublime.
 
 <br />
 
 ## Install
 
-1. Click the download button above (or pick from [Releases](https://github.com/erphq/neo-releases/releases))
+### macOS (Apple Silicon)
+
+1. Click the **Download for macOS** button above (or pick from [Releases](https://github.com/erphq/neo-releases/releases))
 2. Open the `.dmg`, drag **Neo** into **Applications**
 3. Launch from `/Applications/Neo.app`
 
 No Gatekeeper prompt. No right-click → Open workaround. It just opens.
-
-**First-run setup:** open Settings → paste an [OpenRouter](https://openrouter.ai) API key → open a folder → start building.
 
 <details>
 <summary>Why there's no Gatekeeper warning</summary>
@@ -85,6 +89,16 @@ xcrun stapler validate ~/Downloads/Neo_*_aarch64.dmg
 
 </details>
 
+### Windows (x64)
+
+1. Click the **Download for Windows** button above
+2. Run the `.exe` installer
+3. Launch **Neo** from the Start Menu
+
+> **SmartScreen warning:** Windows will show "Windows protected your PC" on first install because the app is currently unsigned. Click **More info → Run anyway** to proceed. We're working on adding a code-signing certificate.
+
+**First-run setup (both platforms):** open Settings → paste an [OpenRouter](https://openrouter.ai) API key → open a folder → start building.
+
 <br />
 
 ## Auto-updates
@@ -93,7 +107,7 @@ Neo checks this repository silently on launch. When a new version is published, 
 
 To update, open **Settings → About → Download and install**. The app downloads, verifies the signature, installs, and relaunches itself.
 
-You can also trigger a check manually from **Settings → About → Check for Updates**.
+> Auto-updates are currently macOS only. Windows auto-update is coming in a future release.
 
 Update artifacts are signed with a dedicated ed25519 key (minisign). The app embeds the matching public key at build time — any tarball that doesn't verify is rejected before install.
 
@@ -103,14 +117,14 @@ Update artifacts are signed with a dedicated ed25519 key (minisign). The app emb
 
 Every tag (`vX.Y.Z`) ships:
 
-| Asset | Purpose |
-| --- | --- |
-| `Neo_X.Y.Z_aarch64.dmg` | macOS installer (what humans download) |
-| `Neo_X.Y.Z_aarch64.app.tar.gz` | In-app auto-update payload |
-| `Neo_X.Y.Z_aarch64.app.tar.gz.sig` | Minisign signature for the payload |
-| `latest.json` | Update manifest consumed by the Tauri updater |
-
-Current builds target **Apple Silicon only**. Intel builds can be added if there's demand — open an issue upstream.
+| Asset | Platform | Purpose |
+| --- | --- | --- |
+| `Neo_X.Y.Z_aarch64.dmg` | macOS | Installer (what humans download) |
+| `Neo_X.Y.Z_aarch64.app.tar.gz` | macOS | In-app auto-update payload |
+| `Neo_X.Y.Z_aarch64.app.tar.gz.sig` | macOS | Minisign signature for the payload |
+| `Neo_X.Y.Z_x64-setup.exe` | Windows | NSIS installer |
+| `Neo_X.Y.Z_x64-setup.exe.sig` | Windows | Updater signature |
+| `latest.json` | both | Update manifest consumed by the Tauri updater |
 
 <br />
 
@@ -121,5 +135,5 @@ Bug reports, feature requests, and discussion: [erphq/neo/issues](https://github
 ---
 
 <div align="center">
-<sub>Built with <a href="https://tauri.app">Tauri</a>. Signed by Apple. Distributed by humans who prefer not to dance around Gatekeeper.</sub>
+<sub>Built with <a href="https://tauri.app">Tauri</a>. Mac builds signed by Apple. Distributed by humans who prefer not to dance around Gatekeeper.</sub>
 </div>
