@@ -4,7 +4,7 @@
 
 # Neo
 
-**A local-first agentic AI coding assistant for your desktop.**
+**The agent console for finance, ops, HR, sales, and support.**
 
 <br />
 
@@ -36,24 +36,23 @@ This repository hosts signed + notarized builds of [**Neo**](https://github.com/
 
 ## What is Neo
 
-Neo is an AI coding assistant that lives on your desktop. Open a folder, ask it to do something, and it reads your code, writes files, runs commands, and gets the job done — all on your machine.
+Neo is the agent console for the people whose job the agent helps with — finance leads, ops managers, sales reps, HR generalists, support engineers. Open Neo, pick a skill or describe the work in plain language, and watch the agent do the busywork: pull invoices, draft customer outreach, reconcile records, investigate anomalies. You approve the moves that matter.
 
-No browser tab. No cloud sync. No subscription. Just a native desktop app that pairs with your editor.
-
-> *"I know kung fu."* — You, after Neo writes your entire test suite.
+Local-first. The chat, your files, your API keys, your memory, and the audit trail of every action all live on your machine. The only thing that ever leaves the machine is the model call itself.
 
 <br />
 
 ## Features
 
-- 🧠 **Works your whole codebase.** Reads files, searches across the project, edits, runs commands — end to end, not one file at a time.
-- 🌐 **Searches the web when it needs to.** Grabs docs, pulls in examples, fetches pages.
-- 💾 **Remembers what matters.** Keeps cross-session notes in a markdown file — architecture decisions, gotchas, preferences — so you don't repeat yourself.
-- 🛡️ **Asks before risky stuff.** Anything that touches your disk or runs a command gets an inline approval prompt. Read-only actions just run.
-- 🧩 **Extends with plugins.** Connect databases, GitHub, your own services — Neo auto-discovers and uses them.
-- 🧭 **Thinks before it acts.** Big tasks start with a plan you can approve before anything runs.
-- 🎨 **Looks how you want.** 14 themes out of the box (Dracula, Nord, Tokyo Night, Catppuccin, and more), custom fonts, light/dark auto-switch.
-- 🚀 **Updates itself.** New versions install with one click from Settings. No re-downloading.
+- 🗣️ **Plain-language chat.** Ask in your own words; Neo routes to the right skill and the right tool.
+- ✅ **Sign off, don't operate.** Anything that mutates external state — sending an email, updating an invoice, running a shell command — surfaces a one-sentence consequence and asks before it acts.
+- 🧩 **Talks to your systems.** ERP, CRM, sheets, inboxes — connect over MCP and the agent can read and write directly.
+- 🛠️ **Installable skills.** Each skill is a markdown file that teaches the agent one job. Install from a curated registry, GitHub, or a local folder.
+- 💾 **Remembers what matters.** Cross-session memory lives in plain markdown — customer history, decisions, preferences — that you can open in any editor.
+- 🌐 **Searches the web when it needs to.** Pulls docs, fetches pages, grabs context.
+- 🔄 **Model-agnostic.** Works on Claude, Gemini, GLM, Llama, Ollama, and more — pick whichever fits your cost / latency / quality budget.
+- 🎨 **Looks how you want.** 14 themes out of the box, custom fonts, light/dark auto-switch.
+- 🚀 **Updates itself.** New versions install with one click from Settings. Signed and verified before install.
 
 <br />
 
@@ -97,7 +96,7 @@ xcrun stapler validate ~/Downloads/Neo_*_aarch64.dmg
 
 > **SmartScreen warning:** Windows will show "Windows protected your PC" on first install because the app is currently unsigned. Click **More info → Run anyway** to proceed. We're working on adding a code-signing certificate.
 
-**First-run setup (both platforms):** open Settings → paste an [OpenRouter](https://openrouter.ai) API key → open a folder → start building.
+**First-run setup (both platforms):** open Settings → paste an [OpenRouter](https://openrouter.ai) or [Fireworks](https://fireworks.ai) API key → pick a skill or just start chatting.
 
 <br />
 
