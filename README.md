@@ -30,7 +30,7 @@
 
 <br />
 
-This repository hosts signed + notarized builds of [**Neo**](https://github.com/erphq/neo). Source code lives in the main [erphq/neo](https://github.com/erphq/neo) repo — this one only holds release artifacts.
+This repository hosts signed + notarized builds of **Neo**. Neo is proprietary, closed-source software; this repo only carries release artifacts and the auto-updater manifests.
 
 <br />
 
@@ -129,7 +129,13 @@ Every tag (`vX.Y.Z`) ships:
 
 ## Support & issues
 
-Bug reports, feature requests, and discussion: [erphq/neo/issues](https://github.com/erphq/neo/issues).
+Bug reports, feature requests, and discussion: [erpai.studio/contact](https://erpai.studio/contact).
+
+<br />
+
+## License
+
+Neo is proprietary software. Copyright © 2026 ERP•AI. All rights reserved. See [LICENSE](LICENSE) for the full notice. The download is free during alpha; the binaries are licensed for use only and may not be redistributed, modified, or reverse-engineered.
 
 ---
 
