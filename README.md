@@ -8,11 +8,11 @@
 
 <br />
 
-<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo_0.1.2_aarch64.dmg">
+<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo-aarch64.dmg">
   <img src="https://img.shields.io/badge/Download%20for%20macOS-black?style=for-the-badge&logo=apple&logoColor=white&labelColor=black" alt="Download for macOS" height="44" />
 </a>
 &nbsp;&nbsp;
-<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo_0.1.2_x64-setup.exe">
+<a href="https://github.com/erphq/neo-releases/releases/latest/download/Neo-x64-setup.exe">
   <img src="https://img.shields.io/badge/Download%20for%20Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white&labelColor=0078D4" alt="Download for Windows" height="44" />
 </a>
 
