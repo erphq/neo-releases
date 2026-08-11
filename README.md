@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/neo-logo.png" width="128" height="128" alt="Neo" />
+<img src="assets/proto-wordmark.svg" width="320" alt="Proto" />
 
 # Neo
 
