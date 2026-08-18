@@ -1,6 +1,9 @@
 <div align="center">
 
-<img src="assets/proto-wordmark.svg" width="320" alt="Proto" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/proto-wordmark-dark.svg" />
+  <img src="assets/proto-wordmark.svg" width="320" alt="Proto" />
+</picture>
 
 # Neo
 
